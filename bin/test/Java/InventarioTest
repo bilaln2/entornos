@@ -1,0 +1,72 @@
+package tienda;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
+
+public class InventarioTest {
+
+    private Inventario inventario;
+
+    @BeforeEach
+    public void setUp() {
+        // Inicializa el inventario antes de cada prueba
+        inventario = new Inventario();
+    }
+
+    @Test
+    public void testAñadirProducto() {
+        Producto producto = new Producto("P001", "Laptop", 450.00, 30);
+        inventario.añadirProducto(producto);
+
+        assertNotNull(inventario.buscarProductoPorCodigo("P001"));
+    }
+
+    @Test
+    public void testBuscarProductoPorCodigo() {
+        Producto producto = new Producto("P002", "Smartphone", 250.00, 100);
+        inventario.añadirProducto(producto);
+
+        Producto encontrado = inventario.buscarProductoPorCodigo("P002");
+
+        assertNotNull(encontrado);
+        assertEquals("P002", encontrado.getCodigo());
+        assertEquals("Smartphone", encontrado.getNombre());
+    }
+
+    @Test
+    public void testEliminarProducto() {
+        Producto producto = new Producto("P003", "Auriculares", 100.00, 15);
+        inventario.añadirProducto(producto);
+
+        inventario.eliminarProducto("P003");
+
+        assertNull(inventario.buscarProductoPorCodigo("P003"));
+    }
+
+    @Test
+    public void testActualizarStock() {
+        Producto producto = new Producto("P004", "Monitor", 200.00, 10);
+        inventario.añadirProducto(producto);
+
+        inventario.actualizarStock("P004", 25);
+
+        Producto actualizado = inventario.buscarProductoPorCodigo("P004");
+        assertNotNull(actualizado);
+        assertEquals(25, actualizado.getStock());
+    }
+
+    @Test
+    public void testListarProductos() {
+        Producto producto1 = new Producto("P005", "Teclado", 40.00, 80);
+        Producto producto2 = new Producto("P006", "Ratón", 30.00, 60);
+        inventario.añadirProducto(producto1);
+        inventario.añadirProducto(producto2);
+
+        List<Producto> productos = inventario.listarProductos();
+
+        assertEquals(2, productos.size());
+    }
+}

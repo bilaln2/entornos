@@ -1,0 +1,15 @@
+# Ignorar archivos Markdown (.md)
+*.md
+
+# Ignorar archivos de compilación (.class)
+*.class
+
+# Ignorar archivos log
+*.log
+
+# Ignorar archivos del sistema operativo (macOS, Windows, Linux)
+.DS_Store
+Thumbs.db
+
+# Ignorar directorios de control de versiones
+.git/
